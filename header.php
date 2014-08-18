@@ -34,5 +34,6 @@
   <body>
   <?php 
     echo '<div class="top-nav"></div>';
-    echo navigation_menu();
+    navigation_menu();
+    custom_header();
     

@@ -5,13 +5,8 @@
  *
  */
 
-/*
- *
- * Register Top Menu Bar and Main Navigation Menu
- *
- */
-
 include_once('Templates/nav.php');
+include_once('Templates/custom_header.php');
 
 /*
  *
