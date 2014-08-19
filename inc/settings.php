@@ -1,6 +1,9 @@
 <?php
 /*
  * Author: Colin Williams
+ * This code snippet is an interperatation found here at
+ * http://code.tutsplus.com/articles/how-to-integrate-the-wordpress-media-uploader-in-theme-and-plugin-options--wp-26052
+ *
  */
 
 //add custom admin menu
@@ -9,62 +12,100 @@ add_action('admin_menu', 'wow_appearence_menu');
 function wow_appearence_menu(){
 	$page_title = 'WOW Nutrition Settings';
 	$menu_title = 'WOW Nutrition Settings';
-	$capability = 'administrator';
+	$capability = 'manage_options';
 	$menu_slug = 'wow-theme-settings';
 	$function = 'wow_settings';
-	$icon_url = get_template_directory_uri() .'/WOWTheme/assets/images/settings_icon.gif';
+	//$icon_url = get_template_directory_uri() .'/WOWTheme/assets/images/settings_icon.gif';
 	
-	add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url );
+	add_theme_page( $page_title, $menu_title, $capability, $menu_slug, $function );
 }
 
 function wow_settings(){
+
+   /* //must check that the user has the required capability 
+    if (!current_user_can('manage_options'))
+    {
+      wp_die( __('You do not have sufficient permissions to access this page.') );
+    }
+
+    // variables for the field and option names 
+    $opt_name = 'mt_favorite_color';
+    $hidden_field_name = 'mt_submit_hidden';
+    $data_field_name = 'mt_favorite_color';
+
+    // Read in existing option value from database
+    $opt_val = get_option( $opt_name );
+
+    // See if the user has posted us some information
+    // If they did, this hidden field will be set to 'Y'
+    if( isset($_POST[ $hidden_field_name ]) && $_POST[ $hidden_field_name ] == 'Y' ) {
+        // Read their posted value
+        $opt_val = $_POST[ $data_field_name ];
+
+        // Save the posted value in the database
+        update_option( $opt_name, $opt_val );
+
+        // Put an settings updated message on the screen
+
+?>
+<div class="updated"><p><strong><?php _e('settings saved.', 'menu-test' ); ?></strong></p></div>
+<?php
+
+    }
+
+    // Now display the settings editing screen
+
+    echo '<div class="wrap">';
+
+    // header
+
+    echo "<h2>" . __( 'Menu Test Plugin Settings', 'menu-test' ) . "</h2>";
+
+    // settings form
+    
+    ?>
+
+<form name="form1" method="post" action="">
+<input type="hidden" name="<?php echo $hidden_field_name; ?>" value="Y">
+
+<p><?php _e("Favorite Color:", 'menu-test' ); ?> 
+<input type="text" name="<?php echo $data_field_name; ?>" value="<?php echo $opt_val; ?>" size="20">
+</p><hr />
+
+<p class="submit">
+<input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save Changes') ?>" />
+</p>
+
+</form>
+</div>
+
+<?php*/
+ 
 	$current_user = wp_get_current_user();
 	$user_id = $current_user->ID;
 
-	if( !user_can($user_id, 'create_users' ) )
+	if( !user_can($user_id, 'manage_options' ) )
 		return false;
 	?>
 	<div class="wrap">
 		<h2>WOW Settings</h2>
-		<form id="featured_upload" method="post" action="#" enctype="multipart/form-data">
-			<input type="file" name="my_image_upload" id="my_image_upload"  multiple="false" />
-			<input type="hidden" name="post_id" id="post_id" value="55" />
-			<?php wp_nonce_field( 'my_image_upload', 'my_image_upload_nonce' ); ?>
-			<input id="submit_my_image_upload" name="submit_my_image_upload" type="submit" value="Upload" />
-		</form>
+		<label for="upload_image">
+    <input id="upload_image" type="text" size="36" name="ad_image" value="http://" /> 
+    <input id="upload_image_button" class="button" type="button" value="Upload Image" />
+    <br />Enter a URL or upload an image
+</label>
 	</div>
 
 <?php
-// Check that the nonce is valid, and the user can edit this post.
-if ( 
-	isset( $_POST['my_image_upload_nonce'], $_POST['post_id']) 
-	&& wp_verify_nonce( $_POST['my_image_upload_nonce'], 'my_image_upload' )
-	&& current_user_can( 'edit_post', $_POST['post_id'] )
-) {
-	// The nonce was valid and the user has the capabilities, it is safe to continue.
-
-	// These files need to be included as dependencies when on the front end.
-	require_once( ABSPATH . 'wp-admin/includes/image.php' );
-	require_once( ABSPATH . 'wp-admin/includes/file.php' );
-	require_once( ABSPATH . 'wp-admin/includes/media.php' );
-	
-	// Let WordPress handle the upload.
-	// Remember, 'my_image_upload' is the name of our file input in our form above.
-	$attachment_id = media_handle_upload( 'my_image_upload', $_POST['post_id'] );
-	
-	if ( is_wp_error( $attachment_id ) ) {
-		// There was an error uploading the image.
-		echo 'error';
-	} else {
-		// The image was uploaded successfully!
-		echo wp_get_attachment_image(  $_POST['post_id'] );
-		the_attachment_link( 4, true );
-		echo 'success!';
-	}
-
-} else {
-
-	// The security check failed, maybe show the user an error.
-	echo ' The security check failed, maybe show the user an error.';
 }
+
+// enqueue and register scripts
+add_action('admin_enqueue_scripts', 'wow_settings_scripts');
+
+function wow_settings_scripts() {
+	if (isset($_GET['page']) && $_GET['page'] == 'wow-theme-settings') {
+		wp_enqueue_media();
+		wp_register_script('wow-my-upload', get_template_directory_uri().'/assets/js/main.js', array('jquery'));
+		wp_enqueue_script('wow-my-upload');
+	}
 }
