@@ -8,7 +8,7 @@ $defaults = array(
 	'flex-height'            => false,
 	'flex-width'             => false,
 	'default-text-color'     => '',
-	'header-text'            => true,
+	'header-text'            => false,
 	'uploads'                => true,
 	'wp-head-callback'       => '',
 	'admin-head-callback'    => '',
@@ -36,18 +36,3 @@ function custom_header(){
     echo '<div class="hero-box">';
     echo'</div></div>';
 }
-function modify_user_contact_methods( $user_contact ){
-
-	/* Add user contact methods */
-	$user_contact['skype'] = __('Skype Username'); 
-	$user_contact['twitter'] = __('Twitter Username'); 
-	$user_contact['description'] = __('Bio'); 
-
-	/* Remove user contact methods */
-	unset($user_contact['description']);
-	unset($user_contact['jabber']);
-
-	return $user_contact;
-}
-
-add_filter('user_contactmethods', 'modify_user_contact_methods');

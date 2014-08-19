@@ -5,8 +5,9 @@
  *
  */
 
-include_once('Templates/nav.php');
-include_once('Templates/custom_header.php');
+include_once('templates/nav.php');
+include_once('templates/custom_header.php');
+include_once('inc/settings.php');
 
 /*
  *
