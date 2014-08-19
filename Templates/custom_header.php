@@ -14,9 +14,12 @@ $defaults = array(
 	'admin-head-callback'    => '',
 	'admin-preview-callback' => '',
 );
+
 add_theme_support( 'custom-header', $defaults );
 
-function header_background(){
+add_action('wp_head', 'wow_header_background');
+
+function wow_header_background(){
 	?>
 	<style>
 		.hero-bg {
@@ -29,9 +32,8 @@ function header_background(){
 	</style>
 	<?php
 }
-add_action('wp_head', 'header_background');
-function custom_header(){
-	//header_background();
+
+function wow_custom_header(){
 	echo '<div class="hero-bg">';
     echo '<div class="hero-box">';
     echo'</div></div>';

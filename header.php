@@ -33,9 +33,10 @@
   </head>
   <body>
   <?php 
+    
     echo '<div class="top-nav"></div>';
     wow_navigation_menu();
     
     if (is_front_page())
-        custom_header();
+        wow_custom_header();
     
