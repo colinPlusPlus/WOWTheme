@@ -1,39 +1,57 @@
-jQuery(document).ready(function($){
+(function($) {
+   $(function() {
+      $.fn.wptuts = function(options) {
+         var selector = $(this).selector; // Get the selector
+         // Set default options
+         var defaults = {
+            'preview' : '.preview-upload',
+            'text'    : '.text-upload',
+            'button'  : '.button-upload',
+         };
+         var options  = $.extend(defaults, options);
  
-	 
-    var custom_uploader;
+         var _custom_media = true;
+         var _orig_send_attachment = wp.media.editor.send.attachment;
  
- 	//This will open the media upload screen. 
- 	//This code is from http://www.webmaster-source.com/2013/02/06/using-the-wordpress-3-5-media-uploader-in-your-plugin-or-theme/
-    $('#upload_image_button').click(function(e) {
+          // When the Button is clicked...
+         $(options.button).click(function() {
+            // Get the Text element.
+            var button = $(this);
+            var text = $(this).siblings(options.text);
+            var send_attachment_bkp = wp.media.editor.send.attachment;
  
-        e.preventDefault();
+            _custom_media = true;
  
-        //If the uploader object has already been created, reopen the dialog
-        if (custom_uploader) {
-            custom_uploader.open();
-            return;
-        }
+            wp.media.editor.send.attachment = function(props, attachment) {
+               if(_custom_media) {
+                  // Get the URL of the new image
+                  text.val(attachment.url).trigger('change');
+               } else {
+                  return _orig_send_attachment.apply(this, [props, attachment]);
+               };
+            }
  
-        //Extend the wp.media object
-        custom_uploader = wp.media.frames.file_frame = wp.media({
-            title: 'Choose Image',
-            button: {
-                text: 'Choose Image'
-            },
-            multiple: false
-        });
+            wp.media.editor.open(button);
  
-        //When a file is selected, grab the URL and set it as the text field's value
-        custom_uploader.on('select', function() {
-            attachment = custom_uploader.state().get('selection').first().toJSON();
-            $('#upload_image').val(attachment.url);
-        });
+            return false;
+         });
  
-        //Open the uploader dialog
-        custom_uploader.open();
+         $('.add_media').on('click', function() {
+           _custom_media = false;
+         });
  
-    });
+         $(options.text).bind('change', function() {
+            // Get the value of current object
+            var url = this.value;
+            // Determine the Preview field
+            var preview = $(this).siblings(options.preview);
+            // Bind the value to Preview field
+            $(preview).attr('src', url);
+         });
+      }
  
- 
-});
+      // Usage
+      $('.upload').wptuts(); // Use as default option.
+   });
+	$('.top-nav').wpColorPicker();
+}(jQuery));

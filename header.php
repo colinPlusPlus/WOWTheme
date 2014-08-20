@@ -29,12 +29,13 @@
     <link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>">
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?> ">
     <!-- endbuild -->
+
     <?php wp_head() ?>
   </head>
   <body>
   <?php 
     
-    echo '<div class="top-nav"></div>';
+    
     wow_navigation_menu();
     
     if (is_front_page())

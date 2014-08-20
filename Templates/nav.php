@@ -7,6 +7,7 @@
  */
 
 add_action( 'init', 'wow_register_my_menus' );
+
 function wow_register_my_menus() {
   
   $menus = array('primary' => __('Main Menu'));
@@ -24,9 +25,18 @@ function wow_navigation_menu(){
 	
 	$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
 	$menu_items = wp_get_nav_menu_items($menu->term_id);
+	
+	$wow_options = get_option( 'wptuts_options' );
+	/*if ( "" != $wptuts_options['logo'] ) :
+    <a href="<?php echo home_url(); ?>"><img title="<?php bloginfo( 'name' ); ?>" src="<?php echo esc_url( $wptuts_options['logo'] ); ?>"/></a>
+	endif;*/
 
-	$menu_list = '<nav class="navbar">'; 
-	$menu_list .= '<img src="assests/img/logo.png" class="img-responsive" alt="logo" title="logo" />';
+	// Start building the navigaton wrappers
+	$menu_list = '<div class="top-nav"></div>';
+	$menu_list .= '<nav class="navbar">'; 
+	if ( "" != $wow_options['logo'] )
+		$menu_list .= '<a herf="'. home_url() .'"> <img title="logo	" alt="logo" class="img-responsive" src="'. esc_url( $wow_options['logo'] ) .'" /> </a>';
+	//$menu_list .= '<img src="assests/img/logo.png" class="img-responsive" alt="logo" title="logo" />';
 	$menu_list .= '<ul class="nav">';
 
 	foreach ( (array) $menu_items as $key => $menu_item ) {
