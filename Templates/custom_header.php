@@ -1,6 +1,6 @@
 <?php
 
-$defaults = array(
+/*$defaults = array(
 	'default-image'          => '',
 	'random-default'         => false,
 	'width'                  => 0,
@@ -37,4 +37,4 @@ function wow_custom_header(){
 	echo '<div class="hero-bg">';
     echo '<div class="hero-box">';
     echo'</div></div>';
-}
+}*/

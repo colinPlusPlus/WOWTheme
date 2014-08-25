@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php wp_title(); ?></title>
+    <title><?php bloginfo('title' );; ?></title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -26,7 +26,7 @@
     -->
 
     <!-- build:css styles/components/main.min.css -->
-    <link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>">
+    
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?> ">
     <!-- endbuild -->
 
@@ -34,7 +34,6 @@
   </head>
   <body>
   <?php 
-    
     
     wow_navigation_menu();
     

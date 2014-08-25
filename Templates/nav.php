@@ -6,14 +6,14 @@
  *
  */
 
-add_action( 'init', 'wow_register_my_menus' );
+/*add_action( 'init', 'wow_register_my_menus' );
 
 function wow_register_my_menus() {
   
   $menus = array('primary' => __('Main Menu'));
   register_nav_menus($menus);
 
-}
+}*/
 
 function wow_navigation_menu(){
 	
@@ -56,6 +56,9 @@ function wow_navigation_menu(){
 
 	$menu_list .= '</ul>';
 	$menu_list .= '</nav>';
+	if (! is_front_page()){
+		$menu_list .= '<div class="bottom-nav"></div>';
+	}
 
     } 
     else {

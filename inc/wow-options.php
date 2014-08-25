@@ -17,7 +17,9 @@ function wptuts_default_options() {
         $options = array(
             'logo' => '',
             'favicon' => '',
-            'color' => '#c2278f'
+            'color' => '#c2278f',
+            'name' => 'Judy French',
+            'bio' => 'Ottawa\'s best kept secrect, Judy French has been serving the metro capital area for the last 15 years as a Nutrition Expert & Lifestyle Coach. She has helped countless individuals in their persuit of healthiness and happiness.'
         );
         update_option( 'wptuts_options', $options );
     }
@@ -52,12 +54,14 @@ function wptuts_add_options() {
     add_settings_section( 'wptuts_section', 'WowTheme Options Section', 'wptuts_section_callback', 'wptuts' );
     add_settings_field( 'wptuts_logo', 'WowTheme Logo', 'wptuts_logo_callback', 'wptuts', 'wptuts_section' );
     add_settings_field( 'wptuts_favicon', 'WowTheme Favicon', 'wptuts_favicon_callback', 'wptuts', 'wptuts_section' );
+    add_settings_field( 'wptuts_name', 'Full Name', 'wptuts_name_callback', 'wptuts', 'wptuts_section' );
+    add_settings_field( 'wptuts_bio', 'Short Bio', 'wptuts_bio_callback', 'wptuts', 'wptuts_section' );
     add_settings_field( 'wptuts_color_picker', 'WowTheme Color Picker', 'wptuts_color_picker_callback', 'wptuts', 'wptuts_section' );
 }
  
 function wptuts_options_validate( $values ) {
-    foreach ( $values as $n => $v )
-        $values[$n] = esc_url( $v );
+    //foreach ( $values as $n => $v )
+    //    $values[$n] = esc_url( $v );
     return $values;
 }
 
@@ -81,6 +85,24 @@ function wptuts_favicon_callback() {
         <input type='text' id='wptuts_favicon' class='regular-text text-upload' name='wptuts_options[favicon]' value='<?php echo esc_url( $options["favicon"] ); ?>'/>
         <input type='button' class='button button-upload' value='Upload an image'/><br />
         <img style='max-width: 300px; display: block;' src='<?php echo esc_url( $options["favicon"] ); ?>' class='preview-upload'/>
+    </span>
+    <?php
+}
+
+function wptuts_name_callback() {
+    $options = get_option( 'wptuts_options' );
+    ?>
+    <span class='upload'>
+        <input type='text' id="wptuts_name" class='regular-text' name='wptuts_options[name]' value='<?php echo $options["name"]; ?>'/>
+    </span>
+    <?php
+}
+
+function wptuts_bio_callback() {
+    $options = get_option( 'wptuts_options' );
+    ?>
+    <span class='upload'>
+        <textarea id="wptuts_bio" class='regular-text' name='wptuts_options[bio]' rows="5" cols="40"><?php echo $options["bio"]; ?></textarea>
     </span>
     <?php
 }

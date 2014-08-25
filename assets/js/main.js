@@ -7,6 +7,7 @@
             'preview' : '.preview-upload',
             'text'    : '.text-upload',
             'button'  : '.button-upload',
+            'bio'     : '#wptuts_bio'
          };
          var options  = $.extend(defaults, options);
  
@@ -52,6 +53,22 @@
  
       // Usage
       $('.upload').wptuts(); // Use as default option.
+      $('.top-nav').wpColorPicker();
+      /*var bio = $('textarea#wptuts_bio').val();
+      $('textarea[value]').append()
+      $('#txtHere').html($(this).val());
+      */
+      $('#submit').click(function(e){
+      
+      });
+
    });
-	$('.top-nav').wpColorPicker();
+
+   /*$(document).ready(function(){
+      var bio = $('textarea#wptuts_bio').val();
+      $('textarea#wptuts_bio').val(bio);
+
+      console.log($('textarea#wptuts_bio').val(bio));
+   });*/
+
 }(jQuery));
