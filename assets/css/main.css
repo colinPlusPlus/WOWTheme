@@ -152,7 +152,7 @@
 .nav li a {
   text-decoration: none;
   font-weight: 800;
-  color: #777777;
+  color: #151515;
   font-size: 18px;
   text-transform: uppercase;
   -webkit-transition: color, 300ms;
@@ -236,7 +236,7 @@
   margin-top: 10px;
   line-height: 1.25em;
   text-align: justify;
-  color: #333333;
+  color: #151515;
 }
 /* line 91, C:/xampp/htdocs/WOWNutrition/assests/sass/header.sass */
 .hero-box .learn-btn {
@@ -291,7 +291,7 @@ div.content-area .site-main {
 div.content-area .site-main h3 {
   font-size: 20px;
   font-weight: 800;
-  color: #333333;
+  color: #151515;
   margin-bottom: 30px;
 }
 /* line 22, C:/xampp/htdocs/WOWNutrition/assests/sass/site-main.sass */
@@ -330,13 +330,13 @@ div.content-area .site-main .content h1 a:hover, div.content-area .site-main .co
 div.content-area .site-main .content p.date, div.content-area .site-main .content-alt p.date {
   font-size: 12px;
   font-weight: 400;
-  color: #333333;
+  color: #151515;
   margin-bottom: 10px;
 }
 /* line 52, C:/xampp/htdocs/WOWNutrition/assests/sass/site-main.sass */
 div.content-area .site-main .content p, div.content-area .site-main .content-alt p {
   line-height: 1.25em;
-  color: #333333;
+  color: #151515;
 }
 /* line 56, C:/xampp/htdocs/WOWNutrition/assests/sass/site-main.sass */
 div.content-area .site-main .content span.read-btn, div.content-area .site-main .content-alt span.read-btn {
@@ -389,8 +389,8 @@ section#sidebar {
   float: left;
   overflow: hidden;
   width: 32.63%;
-  margin-right: 1.042%;
-  color: white;
+  /*margin-right: 1.042%;*/
+  color: #151515;
   margin-right: 0;
 }
 /* line 8, C:/xampp/htdocs/WOWNutrition/assests/sass/sidebar.sass */
@@ -398,10 +398,16 @@ section#sidebar .green-top {
   padding: 10px;
   text-align: center;
   background-color: #5f8e07;
+  text-transform: uppercase;
+  font-weight: 800;
+  padding: 10px 0px;
+  font-size: 20px;
+  color: white;
 }
 /* line 14, C:/xampp/htdocs/WOWNutrition/assests/sass/sidebar.sass */
 section#sidebar .black-body {
-  background-color: #332211;
+  background-color: #e0e0e0;
+  padding: 20px 30px 5px 40px
 }
 
 /* line 20, C:/xampp/htdocs/WOWNutrition/assests/sass/style.sass */

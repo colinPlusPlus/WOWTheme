@@ -18,12 +18,12 @@
 				<?php dynamic_sidebar( 'footer-right' ); ?>
 			<?php endif; ?>
 		</div>
-		<div class="site-info">
+	</footer><!-- #colophon -->
+	<div class="site-info">
 			<a href="<?php echo esc_url( __( 'http://wordpress.org/', 'wow-theme' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'wow-theme' ), 'WordPress' ); ?></a>
 			<span class="sep"> | </span>
 			<?php printf( __( 'Theme: %1$s by %2$s.', 'wow-theme' ), 'WOWtheme', '<a href="http://mainstreetcreativeco.com" rel="designer">Colin Williams</a>' ); ?>
 		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
 </div><!-- #page -->
 
 <?php wp_footer(); ?>

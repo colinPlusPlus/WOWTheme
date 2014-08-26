@@ -7,9 +7,7 @@
  * Description: This theme was designed and develope for exclusive WOW Nutrition dealers.
  *
  */
-/*@import url(assets/css/main.css);*/
   
-
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
@@ -73,6 +71,8 @@ html {
 
 body {
 	background: #fff; /* Fallback for when there is no custom background color defined. */
+	max-width: 1400px;
+	margin: 0 auto
 }
 
 article,
@@ -237,6 +237,10 @@ big {
 /*--------------------------------------------------------------
 3.0 Elements
 --------------------------------------------------------------*/
+a{
+	text-decoration: none;
+}
+
 hr {
 	background-color: #ccc;
 	border: 0;
@@ -246,7 +250,7 @@ hr {
 
 ul,
 ol {
-	margin: 0 0 1.5em 3em;
+	/*margin: 0 0 1.5em 3em;*/
 }
 
 ul {
@@ -260,7 +264,7 @@ ol {
 li > ul,
 li > ol {
 	margin-bottom: 0;
-	margin-left: 1.5em;
+	/*margin-left: 1.5em;*/
 }
 
 dt {
@@ -486,6 +490,27 @@ a:active {
 .main-navigation .current-menu-item a {
 }
 
+.widget{
+	text-transform: uppercase;
+	padding: 10px;
+}
+
+.widget h3{
+	color: #a4d069;
+	font-weight: 800;
+	font-size: 21px;
+	margin-bottom: 5px;
+	text-decoration: underline;
+}
+
+.widget a{
+	color: white;
+}
+
+.widget a:hover{
+	color: #a4d069;
+}
+
 /* Small menu */
 .menu-toggle {
 	display: none;
@@ -624,7 +649,18 @@ a:active {
 }
 
 .site-footer{
-	background-color: #eee;
+	background-color: #817d80;
+	margin-bottom: 30px;
+}
+
+.site-info{
+	width: 80%;
+  	margin: 0 auto; 
+  	overflow: hidden;
+  	*zoom: 1;
+  	background-color: #bdbdbd;
+  	margin-bottom: 20px;
+  	padding: 10px;
 }
 /*--------------------------------------------------------------
 10.0 Content

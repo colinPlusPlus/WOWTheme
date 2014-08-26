@@ -27,7 +27,7 @@ function wptuts_default_options() {
 
 add_action( 'admin_menu', 'wptuts_add_page' );
 function wptuts_add_page() {
-    $wptuts_options_page = add_theme_page( 'wptuts', 'WowTheme Options', 'manage_options', 'wptuts', 'wptuts_options_page' );
+    $wptuts_options_page = add_theme_page( 'WowTheme', 'WowTheme Options', 'manage_options', 'wptuts', 'wptuts_options_page' );
     add_action( 'admin_print_scripts-' . $wptuts_options_page, 'wptuts_print_scripts' );
 }
 function wptuts_options_page() {
@@ -110,7 +110,7 @@ function wptuts_bio_callback() {
 function wptuts_color_picker_callback(){
 	$options = get_option('wptuts_options');
 	?>
-	<input type="text"  name='wptuts_options[color]' value="<?php echo $options['color']?>"class="top-nav" />
+	<input type="color"  name='wptuts_options[color]' value="<?php echo $options['color']?>"class="top-nav" />
 	<?php
 }
 

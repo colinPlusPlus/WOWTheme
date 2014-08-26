@@ -80,10 +80,10 @@ function wow_theme_widgets_init() {
 		'name'          => __( 'Sidebar', 'wow-theme' ),
 		'id'            => 'sidebar-1',
 		'description'   => '',
-		'before_widget' => '<div class="black-body">',
+		'before_widget' => '<div class="green-top">',
 		'after_widget'  => '</div>',
-		'before_title'  => '<div class="green-top"><h1 class="widget-title">',
-		'after_title'   => '</h1></div>',
+		'before_title'  => '<h1 class="widget-title">',
+		'after_title'   => '</div></h1><div class="black-body">',
 	) );
 
 	register_sidebar( array(
