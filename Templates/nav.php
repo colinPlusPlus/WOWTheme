@@ -35,7 +35,7 @@ function wow_navigation_menu(){
 	$menu_list = '<div class="top-nav"></div>';
 	$menu_list .= '<nav class="navbar">'; 
 	if ( "" != $wow_options['logo'] )
-		$menu_list .= '<a herf="'. home_url() .'"> <img title="logo	" alt="logo" class="img-responsive" src="'. esc_url( $wow_options['logo'] ) .'" /> </a>';
+		$menu_list .= '<a href="'. home_url() .'"> <img title="logo" alt="logo" class="img-responsive" src="'. esc_url( $wow_options['logo'] ) .'" /> </a>';
 	//$menu_list .= '<img src="assests/img/logo.png" class="img-responsive" alt="logo" title="logo" />';
 	$menu_list .= '<ul class="nav">';
 

@@ -75,7 +75,7 @@ class Featured_Post_Widget extends WP_Widget {
 					<h1><a href="<?php echo get_the_permalink(); ?>"> <?php echo get_the_title(); ?></a></h1>
 					<p class="date"><?php echo get_the_date('M j/y') ?> &nbsp; By: <?php echo get_the_author(); ?>&nbsp; In: <?php the_category(', '); ?></p>
 					<p><?php echo get_the_excerpt(); ?></p>
-					<a href="<?php echo get_the_permalink(); ?>"><span class="read-btn">Read more</span></a>
+					<!--<a href="<?php //echo get_the_permalink(); ?>"><span class="read-btn">Read more</span></a>-->
 				</div>
 				<?php if(has_post_thumbnail()): ?>
 					<?php the_post_thumbnail( 'full', array( 'class '=> 'img-responsive', 'alt' => 'the_title_attribute()' ) ); ?>

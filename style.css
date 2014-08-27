@@ -493,13 +493,14 @@ a:active {
 .widget{
 	text-transform: uppercase;
 	padding: 10px;
+	text-align: center;
 }
 
 .widget h3{
 	color: #a4d069;
 	font-weight: 800;
 	font-size: 21px;
-	margin-bottom: 5px;
+	margin-bottom: 20px;
 	text-decoration: underline;
 }
 

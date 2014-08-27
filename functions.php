@@ -83,7 +83,7 @@ function wow_theme_widgets_init() {
 		'before_widget' => '<div class="green-top">',
 		'after_widget'  => '</div>',
 		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</div></h1><div class="black-body">',
+		'after_title'   => '</h1></div><div class="black-body">',
 	) );
 
 	register_sidebar( array(
@@ -126,6 +126,13 @@ function wow_theme_widgets_init() {
 }
 add_action( 'widgets_init', 'wow_theme_widgets_init' );
 
+// Replaces the excerpt "more" text by a link
+function new_excerpt_more($more) {
+       global $post;
+	return '<a class="moretag" href="'. get_permalink($post->ID) . '"><span class="read-btn">Read more</span> </a>';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
+
 /**
  * Enqueue scripts and styles.
  */
@@ -137,6 +144,8 @@ function wow_theme_scripts() {
 	wp_enqueue_script( 'wow-theme-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), '20120206', true );
 
 	wp_enqueue_script( 'wow-theme-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), '20130115', true );
+
+	wp_enqueue_script( 'jquery');
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -229,6 +238,3 @@ require get_template_directory() .'/inc/featured-post-widget.php';
 	echo '</section>';
 
 }*/
-
-
-
