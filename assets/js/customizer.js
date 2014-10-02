@@ -33,4 +33,7 @@
 			}
 		} );
 	} );
+
+    // Link Color
+    wp.customize( '' )
 } )( jQuery );

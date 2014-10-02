@@ -1,13 +1,13 @@
 (function($) {
    $(function() {
-      $.fn.wptuts = function(options) {
+      $.fn.wowtheme = function(options) {
          var selector = $(this).selector; // Get the selector
          // Set default options
          var defaults = {
             'preview' : '.preview-upload',
             'text'    : '.text-upload',
             'button'  : '.button-upload',
-            'bio'     : '#wptuts_bio'
+            'bio'     : '#wowtheme_bio'
          };
          var options  = $.extend(defaults, options);
  
@@ -52,7 +52,8 @@
       }
  
       // Usage
-      $('.upload').wptuts(); // Use as default option.
-      $('.top-nav').wpColorPicker();
+      $('.upload').wowtheme(); // Use as default option.
+      $('.primary').wpColorPicker();
+      $('.links').wpColorPicker();
    });
 }(jQuery));
