@@ -116,8 +116,8 @@ function wowtheme_bio_callback() {
 function wowtheme_color_picker_callback(){
   $options = get_option('wowtheme_options');
   ?>
-  <p>Primary Colour:</p><input type="text"  name='wowtheme_options[color_primary]' value="<?php echo $options['color_primary']?>"class="primary" />
-  <p>Links:</p><input type="text"  name='wowtheme_options[color_link]' value="<?php echo $options['color_link']?>"class="links" />
+  <p>Primary Color:</p><input type="text"  name='wowtheme_options[color_primary]' value="<?php echo $options['color_primary']?>"class="primary" />
+  <p>Link Color:</p><input type="text"  name='wowtheme_options[color_link]' value="<?php echo $options['color_link']?>"class="links" />
 <?php
 }
 
@@ -126,23 +126,9 @@ function wowtheme_color_picker_style(){
   $options = get_option('wowtheme_options');
   ?>
   <style type="text/css">
-    .top-nav{
-      background-color: <?php echo $options[ 'color_primary' ] ?>;
-    }
-
-    .nav li.active a, .nav li a:hover{
-      color: <?php echo $options[ 'color_link' ] ?> ;
-    }
-
-    .nav li.btn-contact{
-      background-color: <?php echo $options[ 'color_link' ] ?>;
-      box-shadow: <?php echo color_darken( $options[ 'color_link' ] ) ?> 0px 3px 0px;
-    }
-
     .nav li.btn-contact a {
       color: white;
     }
-
   </style>
 <?php
 }

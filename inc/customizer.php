@@ -9,6 +9,7 @@ require_once( 'color-darken.php' );
  * @since wow_theme 1.0
  * @package WOWtheme
  */
+
 class WowTheme_Customize {
   /**
    * This hooks into 'customize_register' (available as of WP 3.4) and allows
@@ -23,7 +24,8 @@ class WowTheme_Customize {
    * @since wow_theme 1.0
    */
   public static function register ( $wp_customize ) {
-    //1. Define a new section (if desired) to the Theme Customizer
+
+    //Define a new section (if desired) to the Theme Customizer
     $wp_customize->add_section( 'wow_theme_options',
       array(
         'title' => __( 'WowTheme Options', 'wow_theme' ), //Visible title of section
@@ -33,17 +35,45 @@ class WowTheme_Customize {
       )
     );
 
-    //2. Register new settings to the WP database...
+    /* *
+     * Register new settings to the WP database...
+     * */
+
+    // Primary Color Settings
+    $wp_customize->add_setting( 'wowtheme_options[color_primary]', //No need to use a SERIALIZED name, as `theme_mod` settings already live under one db record
+      array(
+        'default' => '#c2278f', //Default setting/value to save
+        'type' => 'option', //Is this an 'option' or a 'theme_mod'?
+        'capability' => 'edit_theme_options', //Optional. Special permissions for accessing this setting.
+        //'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
+      )
+    );
+
+    //Link Color Settings
     $wp_customize->add_setting( 'wowtheme_options[color_link]', //No need to use a SERIALIZED name, as `theme_mod` settings already live under one db record
       array(
         'default' => '#a6e433', //Default setting/value to save
         'type' => 'option', //Is this an 'option' or a 'theme_mod'?
         'capability' => 'edit_theme_options', //Optional. Special permissions for accessing this setting.
-        'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
+       // 'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
       )
     );
 
-    //3. Finally, we define the control itself (which links a setting to a section and renders the HTML controls)...
+    /*
+     * Add controls to the settings defined above
+     */
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( //Instantiate the color control class
+      $wp_customize, //Pass the $wp_customize object (required)
+      'wowtheme_options[color_primary]', //Set a unique ID for the control
+      array(
+        'label' => __( 'Primary Color', 'wow_theme' ), //Admin-visible name of the control
+        'section' => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
+        'settings' => 'wowtheme_options[color_primary]', //Which setting to load and manipulate (serialized is okay)
+        'priority' => 10, //Determines the order this control appears in for the specified section
+      )
+    ) );
+
     $wp_customize->add_control( new WP_Customize_Color_Control( //Instantiate the color control class
       $wp_customize, //Pass the $wp_customize object (required)
       'wowtheme_options[color_link]', //Set a unique ID for the control
@@ -71,13 +101,36 @@ class WowTheme_Customize {
    * @since wow_theme 1.0
    */
   public static function header_output() {
+
+    $options = get_option('wowtheme_options');
+
     ?>
     <!--Customizer CSS-->
     <style type="text/css">
-      <?php self::generate_css('#site-title a', 'color', 'header_textcolor', '#'); ?>
-      <?php self::generate_css('body', 'background-color', 'background_color', '#'); ?>
-      <?php self::generate_css('a', 'color', 'link_textcolor'); ?>
-      <?php self::generate_css( '.hero-box .learn-btn', 'color', '' )
+
+      <?php //Top Navigation ?>
+      <?php self::generate_css( '.top-nav', 'background-color', 'color_primary'); ?>
+      <?php self::generate_css( '.bottom-nav', 'background-color', 'color_primary'); ?>
+
+      <?php self::generate_css( '.nav li.active a, .nav li a:hover', 'color', 'color_link'); ?>
+      <?php self::generate_css( '.nav li.btn-contact', 'background-color', 'color_link'); ?>
+      <?php self::generate_css( '.nav li.btn-contact', 'box-shadow','', color_darken( $options['color_link'] ), ' 0px 3px 0px'); ?>
+      <?php self::generate_css( '.nav li.btn-contact:hover', 'background-color','color_primary'); ?>
+      <?php self::generate_css( '.nav li.btn-contact:hover', 'box-shadow','', color_darken( $options['color_primary'] ), ' 0px 1px 0px'); ?>
+
+      <?php self::generate_css( '.hero-box .learn-btn', 'background-color', 'color_primary'); ?>
+      <?php self::generate_css( '.hero-box .learn-btn', 'box-shadow','', color_darken( $options['color_primary'] ), ' 0px 3px 0px'); ?>
+      <?php self::generate_css( '.hero-box .learn-btn:hover', 'box-shadow', '', color_darken( $options['color_primary'] ), ' 0px 1px 0px' ); ?>
+
+      <?php self::generate_css( 'div.content-area .site-main .content h1 a, div.content-area .site-main .content-alt h1 a', 'color', 'color_primary' ); ?>
+      <?php self::generate_css( 'div.content-area .site-main .content h1 a:hover, div.content-area .site-main .content-alt h1 a:hover', 'color', '', color_darken( $options[ 'color_primary' ], 50 ) ); ?>
+
+      <?php self::generate_css('div.content-area .site-main .content span.read-btn, div.content-area .site-main .content-alt span.read-btn', 'background-color', 'color_link'); ?>
+      <?php self::generate_css('div.content-area .site-main .content span.read-btn, div.content-area .site-main .content-alt span.read-btn', 'box-shadow', '', color_darken( $options[ 'color_link' ] ), ' 0px 3px 0px' ); ?>
+      <?php self::generate_css('div.content-area .site-main .content span.read-btn:hover, div.content-area .site-main .content-alt span.read-btn:hover', 'box-shadow', '', color_darken( $options[ 'color_primary' ] ), ' 0px 1px 0px' ); ?>
+      <?php self::generate_css('div.content-area .site-main .content span.read-btn:hover, div.content-area .site-main .content-alt span.read-btn:hover', 'background-color', '', color_darken( $options[ 'color_primary' ] ) ); ?>
+
+
     </style>
     <!--/Customizer CSS-->
   <?php
@@ -121,11 +174,34 @@ class WowTheme_Customize {
   public static function generate_css( $selector, $style, $mod_name, $prefix='', $postfix='', $echo=true ) {
     $return = '';
     $mod = get_theme_mod($mod_name);
-    if ( ! empty( $mod ) ) {
+    $options = get_option('wowtheme_options');
+
+    if ( empty( $mod_name ) && ! empty( $prefix ) ){
       $return = sprintf('%s { %s:%s; }',
         $selector,
         $style,
+        $prefix.$postfix
+      );
+      if ( $echo ) {
+        echo $return;
+      }
+    }
+
+    if ( ! empty( $mod ) ) {
+      $return = printf('%s { %s:%s; }',
+        $selector,
+        $style,
         $prefix.$mod.$postfix
+      );
+      if ( $echo ) {
+        echo $return;
+      }
+    }
+    elseif ( ! empty($options) ){
+      $return = sprintf('%s { %s:%s; }',
+        $selector,
+        $style,
+        $prefix.$options[$mod_name].$postfix
       );
       if ( $echo ) {
         echo $return;
